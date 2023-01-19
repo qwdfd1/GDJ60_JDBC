@@ -1,6 +1,7 @@
 package com.onion.main;
 
 import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
@@ -10,6 +11,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.onion.main.departments.DepartmentDAO;
+import com.onion.main.departments.DepartmentDTO;
+import com.onion.main.locations.LocationDAO;
+import com.onion.main.locations.LocationDTO;
 
 /**
  * Handles requests for the application home page.
@@ -34,6 +41,23 @@ public class HomeController {
 		model.addAttribute("serverTime", formattedDate );
 		
 		return "home";
+	}
+	
+	@RequestMapping("departments")
+
+	public void getDepartments(Model model) throws Exception {
+		DepartmentDAO departmentDAO = new DepartmentDAO();
+		ArrayList<DepartmentDTO> departmentDTOs = departmentDAO.getList();
+		
+		model.addAttribute("list", departmentDTOs);
+
+	}
+	
+	@RequestMapping("locations")
+	public void getLocations() throws Exception {
+		LocationDAO locationDAO = new LocationDAO();
+		ArrayList<LocationDTO> locationDTOs = locationDAO.getList();
+		
 	}
 	
 }
