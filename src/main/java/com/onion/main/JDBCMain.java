@@ -14,30 +14,16 @@ import com.onion.main.util.DBConnection;
 public class JDBCMain {
 	public static void main(String[] args) {
 		System.out.println("Start");
-		
-//		DepartmentController departmentController = new DepartmentController();
-//		try {
-//			departmentController.start();
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		LocationController locationController = new LocationController();
-//		try {
-//			locationController.start();
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-		
-		EmployeeController employeeController = new EmployeeController();
+		FrontController frontController = new FrontController();
 		try {
-			employeeController.start();
+			frontController.start();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
+		
+		
 
 		System.out.println("Finish");
 	}

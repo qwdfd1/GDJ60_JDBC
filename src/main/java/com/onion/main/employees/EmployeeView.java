@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class EmployeeView {
 	
 	public void listView(ArrayList<EmployeeDTO> employeeDTOs) {
+		System.out.println("사원\t번호\t성\t이름\t직군\t부서번호");
 		for (EmployeeDTO employeeDTO : employeeDTOs) {
 			System.out.print(employeeDTO.getEmployee_id() + "\t");
 			System.out.print(employeeDTO.getLast_name() + "\t");

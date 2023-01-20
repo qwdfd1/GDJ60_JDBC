@@ -8,7 +8,7 @@ public class EmployeeDTO {
 	private String last_name;
 	private String email;
 	private String phone_number;
-	private Date hire_date;
+	private String hire_date;
 	private String job_id;
 	private Integer salary;
 	private Double commission_pct;
@@ -49,12 +49,14 @@ public class EmployeeDTO {
 	public void setPhone_number(String phone_number) {
 		this.phone_number = phone_number;
 	}
-	public Date getHire_date() {
+	public String getHire_date() {
 		return hire_date;
 	}
-	public void setHire_date(Date hire_date) {
+
+	public void setHire_date(String hire_date) {
 		this.hire_date = hire_date;
 	}
+
 	public String getJob_id() {
 		return job_id;
 	}

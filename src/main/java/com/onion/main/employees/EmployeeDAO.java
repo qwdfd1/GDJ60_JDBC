@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.onion.main.util.DBConnection;
 
@@ -11,25 +13,34 @@ import oracle.jdbc.proxy.annotation.Pre;
 
 public class EmployeeDAO {
 	
-	public ArrayList<Double> getAVG() throws Exception {
+	public HashMap<String, Double> getAVG() throws Exception {
 		Connection conn = DBConnection.getConnection();
 		
 		
-		String sql = "SELECT AVG(SALARY) a, SUM(SALARY) b FROM EMPLOYEES";
+		String sql = "SELECT AVG(SALARY) A, SUM(SALARY) B FROM EMPLOYEES";
 		
 		PreparedStatement ps = conn.prepareStatement(sql);
 		
 		ResultSet rs = ps.executeQuery();
 
-		ArrayList<Double> result = new ArrayList<Double>();
- 		
-		rs.next();
-		result.add(rs.getDouble("a"));
-		result.add(rs.getDouble("b"));
+//		//ArrayList, Array
+//		ArrayList<Double> result = new ArrayList<Double>();
+// 		
+//		rs.next();
+//		result.add(rs.getDouble("a"));
+//		result.add(rs.getDouble("b"));
+//		
+//		for(int i=0; i<result.size(); i++) {
+//			System.out.println(result.get(i));
+//		}
 		
-		for(int i=0; i<result.size(); i++) {
-			System.out.println(result.get(i));
-		}
+		
+		
+		
+		//HashMap
+		HashMap<String, Double> result = new HashMap<String, Double>();
+		result.put("avg", rs.getDouble("A"));
+		result.put("sum", rs.getDouble("B"));
 		
 		DBConnection.disConnect(rs, ps, conn);
 		
@@ -86,7 +97,7 @@ public class EmployeeDAO {
 			employeeDTO.setLast_name(rs.getString("LAST_NAME"));
 			employeeDTO.setEmail(rs.getString("EMAIL"));
 			employeeDTO.setPhone_number(rs.getString("PHONE_NUMBER"));
-			employeeDTO.setHire_date(rs.getDate("HIRE_DATE"));
+			employeeDTO.setHire_date(rs.getString("HIRE_DATE"));
 			employeeDTO.setJob_id(rs.getString("JOB_ID"));
 			employeeDTO.setSalary(rs.getInt("SALARY"));
 			employeeDTO.setCommission_pct(rs.getDouble("COMMISSION_PCT"));
@@ -123,7 +134,7 @@ public class EmployeeDAO {
 			employeeDTO.setLast_name(rs.getString("LAST_NAME"));
 			employeeDTO.setEmail(rs.getString("EMAIL"));
 			employeeDTO.setPhone_number(rs.getString("PHONE_NUMBER"));
-			employeeDTO.setHire_date(rs.getDate("HIRE_DATE"));
+			employeeDTO.setHire_date(rs.getString("HIRE_DATE"));
 			employeeDTO.setJob_id(rs.getString("JOB_ID"));
 			employeeDTO.setSalary(rs.getInt("SALARY"));
 			employeeDTO.setCommission_pct(rs.getDouble("COMMISSION_PCT"));
@@ -146,29 +157,31 @@ public class EmployeeDAO {
 		PreparedStatement ps;
 		
 		if(employeeDTO.getCommission_pct() == null) {
-			sql = "INSERT INTO EMPLOYEES VALUES(EMPLOYEES_SEQ.NEXTVAL, ?, ?, ?, ?, SYSDATE, ?, ?, NULL, ?, ?)";
+			sql = "INSERT INTO EMPLOYEES VALUES(EMPLOYEES_SEQ.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, NULL, ?, ?)";
 			ps = conn.prepareStatement(sql);
 			ps.setString(1, employeeDTO.getFirst_name());
 			ps.setString(2, employeeDTO.getLast_name());
 			ps.setString(3, employeeDTO.getEmail());
 			ps.setString(4, employeeDTO.getPhone_number());
-			ps.setString(5, employeeDTO.getJob_id());
-			ps.setInt(6, employeeDTO.getSalary());
-			ps.setInt(7, employeeDTO.getManager_id());
-			ps.setInt(8, employeeDTO.getDepartment_id());
-		}
-		else {
-			sql = "INSERT INTO EMPLOYEES VALUES(EMPLOYEES_SEQ.NEXTVAL, ?, ?, ?, ?, SYSDATE, ?, ?, ?, ?, ?)";
-			ps = conn.prepareStatement(sql);
-			ps.setString(1, employeeDTO.getFirst_name());
-			ps.setString(2, employeeDTO.getLast_name());
-			ps.setString(3, employeeDTO.getEmail());
-			ps.setString(4, employeeDTO.getPhone_number());
-			ps.setString(5, employeeDTO.getJob_id());
-			ps.setInt(6, employeeDTO.getSalary());
-			ps.setDouble(7, employeeDTO.getCommission_pct());
+			ps.setString(5, employeeDTO.getHire_date());
+			ps.setString(6, employeeDTO.getJob_id());
+			ps.setInt(7, employeeDTO.getSalary());
 			ps.setInt(8, employeeDTO.getManager_id());
 			ps.setInt(9, employeeDTO.getDepartment_id());
+		}
+		else {
+			sql = "INSERT INTO EMPLOYEES VALUES(EMPLOYEES_SEQ.NEXTVAL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+			ps = conn.prepareStatement(sql);
+			ps.setString(1, employeeDTO.getFirst_name());
+			ps.setString(2, employeeDTO.getLast_name());
+			ps.setString(3, employeeDTO.getEmail());
+			ps.setString(4, employeeDTO.getPhone_number());
+			ps.setString(5, employeeDTO.getHire_date());
+			ps.setString(6, employeeDTO.getJob_id());
+			ps.setInt(7, employeeDTO.getSalary());
+			ps.setDouble(8, employeeDTO.getCommission_pct());
+			ps.setInt(9, employeeDTO.getManager_id());
+			ps.setInt(10, employeeDTO.getDepartment_id());
 		}
 		
 	

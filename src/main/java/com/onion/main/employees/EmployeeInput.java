@@ -25,6 +25,9 @@ public class EmployeeInput {
 		System.out.println("핻드폰 번호를 입력하세요. -도 입력");
 		employeeDTO.setPhone_number(sc.next());
 		
+		System.out.println("날짜를 입력하세요 ex)2023-11-11 : ");
+		employeeDTO.setHire_date(sc.next()); 
+		
 		System.out.println("직군을 입력하세요.");
 		employeeDTO.setJob_id(sc.next());
 		
@@ -36,6 +39,7 @@ public class EmployeeInput {
 		if(commission_pct == 0.0) {
 			commission_pct = null;
 		}
+		
 		employeeDTO.setCommission_pct(commission_pct);
 		
 		System.out.println("상사 번호를 입력해주세요");
