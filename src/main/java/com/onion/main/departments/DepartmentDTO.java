@@ -1,5 +1,9 @@
 package com.onion.main.departments;
 
+import java.util.ArrayList;
+
+import com.onion.main.employees.EmployeeDTO;
+
 public class DepartmentDTO {
 	
 	//모든 멤버변수와 접근지정자는 private
@@ -14,6 +18,18 @@ public class DepartmentDTO {
 	private Integer manager_id;
 	private Integer location_id;
 	
+	private ArrayList<EmployeeDTO> employeeDTOs;
+	
+	
+
+	public ArrayList<EmployeeDTO> getEmployeeDTOs() {
+		return employeeDTOs;
+	}
+
+	public void setEmployeeDTOs(ArrayList<EmployeeDTO> employeeDTOs) {
+		this.employeeDTOs = employeeDTOs;
+	}
+
 	public DepartmentDTO() {
 		// TODO Auto-generated constructor stub
 	}

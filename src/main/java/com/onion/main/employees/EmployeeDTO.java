@@ -2,7 +2,9 @@ package com.onion.main.employees;
 
 import java.sql.Date;
 
-public class EmployeeDTO {
+import com.onion.main.departments.DepartmentDTO;
+
+public class EmployeeDTO  {
 	private Integer employee_id;
 	private String first_name;
 	private String last_name;
@@ -15,9 +17,21 @@ public class EmployeeDTO {
 	private Integer manager_id;
 	private Integer department_id;
 	
+	private DepartmentDTO departmentDTO;
+	
+	
 	public EmployeeDTO() {
-
+		
 	}
+	
+	public DepartmentDTO getDepartmentDTO() {
+		return departmentDTO;
+	}
+
+	public void setDepartmentDTO(DepartmentDTO departmentDTO) {
+		this.departmentDTO = departmentDTO;
+	}
+
 	
 	public Integer getEmployee_id() {
 		return employee_id;

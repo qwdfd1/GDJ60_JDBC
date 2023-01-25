@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.prefs.PreferenceChangeEvent;
 
+import com.onion.main.employees.EmployeeDTO;
 import com.onion.main.locations.LocationDTO;
 import com.onion.main.util.DBConnection;
 
@@ -134,6 +135,78 @@ public class DepartmentDAO {
 		
 		return result;
 		
+	}
+	
+	// 사원정보와 부서명 출력
+	public DepartmentDTO getInfo() throws Exception {
+		DepartmentDTO departmentDTO = null;
 		
+		Connection conn = DBConnection.getConnection();
+		
+		String sql = "SELECT E.FIRST_NAME, D.DEPARTMENT_NAME "
+				+ "FROM EMPLOYEES E "
+				+ "INNER JOIN "
+				+ "DEPARTMENTS D "
+				+ "ON(E.DEPARTMENT_ID=D.DEPARTMENT_ID) "
+				+ "WHERE E.EMPLOYEE_ID = 100";
+		
+		PreparedStatement ps = conn.prepareStatement(sql);
+		
+		ResultSet rs = ps.executeQuery();
+		
+		
+		if(rs.next()) {
+			departmentDTO = new DepartmentDTO();
+			departmentDTO.setEmployeeDTOs(new ArrayList<EmployeeDTO>());
+			departmentDTO.setDepartment_name(rs.getString("DEPARTMENT_NAME"));
+			// 에러
+//			departmentDTO.getEmployeeDTOs().get(0).setFirst_name(rs.getString("FIRST_NAME"));
+			
+
+			EmployeeDTO employeeDTO = new EmployeeDTO();
+			employeeDTO.setFirst_name(rs.getString("FIRST_NAME"));
+			
+//			null().add();
+//			arraylist 객체 만들지 않으면 NUllPOINTER EXCEPTION
+			departmentDTO.getEmployeeDTOs().add(employeeDTO);
+		}
+		
+		return departmentDTO;
+				
+	}
+	
+	public void getInfos() throws Exception {
+		
+		Connection conn = DBConnection.getConnection();
+		
+
+		
+		String sql = "SELECT e.FIRST_NAME , d.DEPARTMENT_NAME "
+				+ "FROM EMPLOYEES e"
+				+ "	INNER JOIN"
+				+ "	DEPARTMENTS d"
+				+ "	USING (DEPARTMENT_ID) "
+				+ "WHERE DEPARTMENT_ID = 30";
+		
+		PreparedStatement ps  = conn.prepareStatement(sql);
+		
+		ResultSet rs = ps.executeQuery();
+		
+		DepartmentDTO departmentDTO = new DepartmentDTO();
+		departmentDTO.setEmployeeDTOs(new ArrayList<EmployeeDTO>());
+		
+		while(rs.next()) {
+			if (departmentDTO.getDepartment_name() == null) {
+				departmentDTO.setDepartment_name(rs.getString("DEPARTMENT_NAME"));
+			}
+			
+			EmployeeDTO employeeDTO = new EmployeeDTO();
+			employeeDTO.setFirst_name(rs.getString("FIRST_NAME"));
+			departmentDTO.getEmployeeDTOs().add(employeeDTO);
+			
+			
+		}
+		
+	
 	}
 }
