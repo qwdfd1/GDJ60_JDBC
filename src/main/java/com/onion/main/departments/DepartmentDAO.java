@@ -179,7 +179,7 @@ public class DepartmentDAO {
 		
 		Connection conn = DBConnection.getConnection();
 		
-
+		
 		
 		String sql = "SELECT e.FIRST_NAME , d.DEPARTMENT_NAME "
 				+ "FROM EMPLOYEES e"
@@ -187,6 +187,8 @@ public class DepartmentDAO {
 				+ "	DEPARTMENTS d"
 				+ "	USING (DEPARTMENT_ID) "
 				+ "WHERE DEPARTMENT_ID = 30";
+		
+		
 		
 		PreparedStatement ps  = conn.prepareStatement(sql);
 		
