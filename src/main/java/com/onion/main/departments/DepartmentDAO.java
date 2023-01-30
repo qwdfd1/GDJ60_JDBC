@@ -189,7 +189,6 @@ public class DepartmentDAO {
 				+ "WHERE DEPARTMENT_ID = 30";
 		
 		
-		
 		PreparedStatement ps  = conn.prepareStatement(sql);
 		
 		ResultSet rs = ps.executeQuery();
